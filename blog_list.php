@@ -12,15 +12,16 @@
         <ul>
             <li><a href="index.php">Accueil</a></li>
             <li><a href="blog_list.php">Articles</a></li>
-			<?php
-			session_start();
-			if (isset($_SESSION['user_id'])) {
-				echo '<li><a href="logout.php">Déconnexion</a></li>';
-			} else {
-				echo '<li><a href="login.php">Connexion</a></li>';
-				echo '<li><a href="register.php">Créer un compte</a></li>';
-			}
-			?>
+		    <?php
+		    session_start();
+		    if (isset($_SESSION['user_id'])) {
+			    echo'<li><a href="admin/admin_home.php">Mon Compte</a></li>';
+			    echo '<li><a href="logout.php">Déconnexion</a></li>';
+		    } else {
+			    echo '<li><a href="login.php">Connexion</a></li>';
+			    echo '<li><a href="register.php">Créer un compte</a></li>';
+		    }
+		    ?>
         </ul>
     </nav>
 </header>
@@ -29,14 +30,16 @@
 	<h2>Liste des Articles</h2>
 	<section>
 		<?php
-		// Ici, vous devrez récupérer les articles depuis la base de données et les afficher
-		// Par exemple (à adapter selon votre architecture et votre logique de récupération des articles) :
-
-		// Exemple de connexion à la base de données (à adapter)
+		// connexion bdd
 		$pdo = new PDO('mysql:host=localhost;dbname=jdblog', 'root', 'Julien77@+');
 
-		// Exemple de requête pour récupérer les articles (à adapter)
-		$query = $pdo->query("SELECT * FROM articles ORDER BY created_at DESC");
+		// Requête pour récupérer les articles avec les informations sur les auteurs
+		$query = $pdo->query("SELECT a.title, a.id, a.created_at, a.updated_at, a.chapo, u.firstname, u.lastname 
+                      FROM articles a 
+                      INNER JOIN user u ON a.author = u.id 
+                      WHERE a.status = 'published' 
+                      ORDER BY a.created_at DESC");
+
 		$articles = $query->fetchAll(PDO::FETCH_ASSOC);
 
 		// Affichage des articles
@@ -45,7 +48,8 @@
 			echo '<h3>' . $article['title'] . '</h3>';
 			echo '<p>Date de dernière modification : ' . $article['updated_at'] . '</p>';
 			echo '<p>' . $article['chapo'] . '</p>';
-			echo '<p>' . $article['author'] . '</p>';
+			echo '<p>Auteur : ' . $article['firstname'] . ' ' . $article['lastname'] . '</p>';
+			echo '<p>le ' . $article['created_at'] . '</p>';
 			echo '<a href="blog_detail.php?id=' . $article['id'] . '">Lire l\'article</a>';
 			echo '</article>';
 		}
@@ -56,7 +60,7 @@
 <footer>
 	<nav>
 		<ul>
-            <li><a href="admin/admin_home.php">Mon Compte</a></li>
+
 		</ul>
 	</nav>
 </footer>

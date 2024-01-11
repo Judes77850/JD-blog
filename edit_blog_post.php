@@ -30,10 +30,10 @@
 			$article_id = $_GET['id'];
 
 			// Exemple de connexion à la base de données (à adapter)
-			$pdo = new PDO('mysql:host=nom_hote;dbname=nom_base_de_donnees', 'utilisateur', 'mot_de_passe');
+			$pdo = new PDO('mysql:host=localhost;dbname=jdblog', 'root', 'Julien77@+');
 
 			// Exemple de requête pour récupérer les détails de l'article (à adapter)
-			$query = $pdo->prepare("SELECT * FROM articles WHERE id = :id");
+			$query = $pdo->prepare("SELECT * FROM articles WHERE id = ?");
 			$query->execute(array(':id' => $article_id));
 			$article = $query->fetch(PDO::FETCH_ASSOC);
 

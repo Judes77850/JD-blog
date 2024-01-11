@@ -3,7 +3,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Modifier/Supprimer un Article - Mon Blog</title>
-	<!-- Vous pouvez inclure ici vos liens vers des fichiers CSS, des scripts JavaScript, etc. -->
 </head>
 <body>
 <header>
@@ -22,18 +21,16 @@
 	<section>
 		<h2>Modifier/Supprimer un Article</h2>
 		<?php
-		// Ici, vous devrez récupérer les détails de l'article à modifier/supprimer depuis la base de données
-		// et les afficher pour permettre à l'utilisateur de les modifier ou supprimer
 
-		// Exemple de récupération de l'ID de l'article depuis l'URL
+		// récup de l'ID de l'article depuis l'URL
 		if (isset($_GET['id'])) {
 			$article_id = $_GET['id'];
 
-			// Exemple de connexion à la base de données (à adapter)
-			$pdo = new PDO('mysql:host=nom_hote;dbname=nom_base_de_donnees', 'utilisateur', 'mot_de_passe');
+			// connexion bdd
+			$pdo = new PDO('mysql:host=localhost;dbname=jdblog', 'root', 'Julien77@+');
 
-			// Exemple de requête pour récupérer les détails de l'article (à adapter)
-			$query = $pdo->prepare("SELECT * FROM articles WHERE id = :id");
+			// récupérer les détails de l'article
+			$query = $pdo->prepare("SELECT * FROM articles WHERE id = ?");
 			$query->execute(array(':id' => $article_id));
 			$article = $query->fetch(PDO::FETCH_ASSOC);
 
@@ -45,6 +42,7 @@
 				<p>Chapô : <?php echo $article['chapo']; ?></p>
 				<p>Contenu : <?php echo $article['contenu']; ?></p>
 				<p>Auteur : <?php echo $article['auteur']; ?></p>
+				<p>Auteur : <?php echo $article['status']; ?></p>
 				<a href="edit_article.php?id=<?php echo $article['id']; ?>">Modifier</a>
 				<a href="delete_article.php?id=<?php echo $article['id']; ?>">Supprimer</a>
 				<?php
@@ -62,7 +60,6 @@
 	<nav>
 		<ul>
 			<li><a href="logout.php">Déconnexion</a></li>
-			<!-- Autres liens du footer -->
 		</ul>
 	</nav>
 </footer>

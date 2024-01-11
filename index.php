@@ -2,12 +2,11 @@
 <html lang="fr">
 <head>
 	<meta charset="UTF-8">
-	<title>Mon Blog - Accueil</title>
-	<!-- Vous pouvez inclure ici vos liens vers des fichiers CSS, des scripts JavaScript, etc. -->
+	<title>JD-Blog - Accueil</title>
 </head>
 <body>
 <header>
-	<h1>Mon Blog</h1>
+	<h1>JD-Blog</h1>
 	<nav>
 		<ul>
 			<li><a href="index.php">Accueil</a></li>
@@ -15,6 +14,7 @@
 			<?php
 			session_start();
 			if (isset($_SESSION['user_id'])) {
+				echo'<li><a href="admin/admin_home.php">Mon Compte</a></li>';
 				echo '<li><a href="logout.php">Déconnexion</a></li>';
 			} else {
 				echo '<li><a href="login.php">Connexion</a></li>';
@@ -25,7 +25,7 @@
 	</nav>
     <?php
     if (isset($_SESSION['user_id'])) {
-	    // Connexion à la base de données
+	    // Connexion bdd
 	    $pdo = new PDO('mysql:host=localhost;dbname=jdblog', 'root', 'Julien77@+');
 
 	    // Récupérer le prénom de l'utilisateur en utilisant son ID depuis la session
@@ -34,19 +34,17 @@
 	    $query->execute([$user_id]);
 	    $user = $query->fetch(PDO::FETCH_ASSOC);
 
-	    // Si le prénom est récupéré avec succès, le stocker dans la session
+	    // Si le prénom est récupéré, stocker dans la session
 	    if ($user && isset($user['pseudo'])) {
 		    $_SESSION['pseudo'] = $user['pseudo'];
 	    }
 
-	    // Afficher le prénom de l'utilisateur
+	    // Afficher pseudo de l'utilisateur
 	    if (isset($_SESSION['pseudo'])) {
 		    echo "Hello, " . $_SESSION['pseudo'];
 	    } else {
 		    echo "Hello";
 	    }
-	    // Autres contenus spécifiques à l'utilisateur connecté
-	    // ...
     }
 
 
@@ -82,9 +80,7 @@
 <footer>
 	<nav>
 		<ul>
-			<!-- Lien vers l'administration -->
-			<li><a href="admin/admin_home.php">Mon Compte</a></li>
-			<!-- Autres liens du footer -->
+
 		</ul>
 	</nav>
 </footer>

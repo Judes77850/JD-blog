@@ -33,10 +33,10 @@
 		$user = $query->fetch(PDO::FETCH_ASSOC);
 
 		// Si le prénom est récupéré avec succès, le stocker dans la session
-		if ($user && isset($user['pseudo, lastname, firstname, email'])) {
-			$_SESSION['pseudo'] = $user['pseudo'];
-			$_SESSION['lastname'] = $user['lastname'];
+		if ($user && isset($user['firstname, pseudo, lastname, email'])) {
 			$_SESSION['firstname'] = $user['firstname'];
+			$_SESSION['lastname'] = $user['lastname'];
+			$_SESSION['pseudo'] = $user['pseudo'];
 			$_SESSION['email'] = $user['email'];
 		}
 

@@ -8,12 +8,20 @@
 <header>
 	<h1>Mon Blog</h1>
 	<nav>
-		<ul>
-			<li><a href="index.php">Accueil</a></li>
-			<li><a href="blog_list.php">Articles</a></li>
-			<li><a href="login.php">Connexion</a></li>
-			<!-- Ajout d'autres liens de navigation ici selon besoins -->
-		</ul>
+        <ul>
+            <li><a href="index.php">Accueil</a></li>
+            <li><a href="blog_list.php">Articles</a></li>
+			<?php
+			session_start();
+			if (isset($_SESSION['user_id'])) {
+				echo'<li><a href="admin/admin_home.php">Mon Compte</a></li>';
+				echo '<li><a href="logout.php">Déconnexion</a></li>';
+			} else {
+				echo '<li><a href="login.php">Connexion</a></li>';
+				echo '<li><a href="register.php">Créer un compte</a></li>';
+			}
+			?>
+        </ul>
 	</nav>
 </header>
 
