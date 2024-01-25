@@ -13,9 +13,8 @@
 		?>
 	</nav>
 </header>
-
-<main>
-    <section>
+<main class="d-flex mx-auto bg-secondary row">
+    <section class="col col-8 mx-auto">
         <h2>Super BLOG</h2>
         <p>Une photo et/ou un logo</p>
         <p>Bienvenu sur mon blog</p>

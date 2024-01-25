@@ -50,6 +50,8 @@ if (!$article) {
             <input type="text" id="title" name="title" value="<?= $article['title']; ?>"><br>
             <label for="content">Contenu :</label><br>
             <textarea id="content" name="content" rows="4" cols="50"><?= $article['content']; ?></textarea><br>
+            <label for="image">Image (moins de 2mo) :</label><br>
+            <input type="file" id="image" name="image" accept="image/*"><br>
             <label for="status">Status :</label><br>
             <select id="status" name="status" required>
                 <option value="published" <?= ($article['status'] === 'published') ? 'selected' : ''; ?>>Publié</option>

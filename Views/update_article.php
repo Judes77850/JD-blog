@@ -19,8 +19,7 @@ $article_id = $_POST['article_id'];
 $title = $_POST['title'];
 $content = $_POST['content'];
 $status = $_POST['status'];
-
-// Vérification si l'article appartient à l'utilisateur connecté
+$image_path = $_POST['image_path'];
 $user_id = $_SESSION['user_id'];
 $query = $pdo->prepare("SELECT * FROM articles WHERE id = ? AND author = ?");
 $query->execute([$article_id, $user_id]);
@@ -32,8 +31,8 @@ if (!$article) {
 	exit();
 }
 
-$updateQuery = $pdo->prepare("UPDATE articles SET title = ?, content = ?, status = ? WHERE id = ?");
-$updateQuery->execute([$title, $content, $status, $article_id]);
+$updateQuery = $pdo->prepare("UPDATE articles SET title = ?, content = ?, status = ?, image_path = ? WHERE id = ?");
+$updateQuery->execute([$title, $content, $status, $image_path, $article_id]);
 
 header("Location: admin_blog_list");
 exit();
