@@ -1,0 +1,102 @@
+@import "../../vendor/twbs/bootstrap/scss/bootstrap.scss";
+
+$primary-color: rgb(75, 95, 136); // Exemple de couleur principale
+$secondary-color: rgb(84, 107, 149); // Exemple de couleur secondaire
+$tertiary-color: rgb(196, 61, 71); // Exemple de couleur d'accentuation
+$fourth-color: rgb(218, 182, 105); // Exemple de couleur d'accentuation
+
+main {
+  margin: auto;
+}
+
+a{
+  text-decoration: none;
+  :hover{
+    color: green;
+  }
+}
+
+header{
+  background-color: black;
+}
+
+.header-logo{
+  width: 150px;
+}
+
+.content{
+  max-width: 1400px;
+  margin: auto;
+}
+
+.bg-success-mail{
+  background: url("../images/style/sucess_email.webp");
+  background-size: cover;
+  .to-opacity{
+    background: linear-gradient(#000000, rgba(0, 0, 0, 0.09));
+  }
+}
+
+.article{
+  .article-main-img{
+    width: 40%;
+  }
+}
+
+.home-intro{
+  background: url("../../assets/images/style/home-bg.jpeg");
+  background-size: cover;
+  height: 80vh;
+}
+
+.big-title{
+  font-size: 96px;
+}
+
+@mixin apply-primary-background {
+  background-color: $primary-color;
+}
+
+@mixin apply-secondary-background {
+  background-color: $secondary-color;
+}
+
+@mixin apply-tertiary-background {
+  background-color: $tertiary-color;
+}
+
+@mixin apply-fourth-background {
+  background-color: $fourth-color;
+}
+
+
+.card {
+  width: 300px;
+  min-width: 280px;
+  max-height: 600px;
+  margin: 20px;
+  border: none;
+  box-shadow: #afafaf 1px 1px 35px;
+
+  .card-text {
+    height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card-img-top {
+    height: 300px;
+    object-fit: cover;
+  }
+}
+
+.comment-card{
+  @include apply-fourth-background;
+}
+
+.comment{
+  @include apply-secondary-background;
+  max-width: 400px;
+  border-radius: 15px;
+  padding: 10px;
+}

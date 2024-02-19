@@ -19,7 +19,8 @@ if (ini_get("session.use_cookies")) {
 	);
 }
 
-// Détruisez la session
+// Détruire la session
+unset($_SESSION['user_id']);
 session_destroy();
 
 // Redirigez vers une autre page après la déconnexion (par exemple, la page d'accueil)

@@ -1,48 +1,25 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Mon Blog - Liste des Articles</title>
+<?php
 
-</head>
-<body>
-<nav>
-    <?php
-    $router = require_once __DIR__ . '/../index.php';
-    require_once 'Views/header.php';
-    ?>
-</nav>
-<main>
-    <h2>Liste des Articles</h2>
-    <section class="d-flex justify-space-between align-items-between">
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../DatabaseManager.php';
+require_once 'Views/header.php';
+require __DIR__ . '/../Model/Article.php';
 
-		<?php
-		$pdo = new PDO('mysql:host=localhost;dbname=jdblog', 'root', 'Julien77@+');
-		require __DIR__ . '/../Model/Article.php';
-		$articleModel = new \Model\Article($pdo);
-		$articles = $articleModel->getPublishedArticles();
+$router = require_once __DIR__ . '/../index.php';
+$loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../templates');
+$twig = new \Twig\Environment($loader);
 
-        if (isset($articles) && is_array($articles)) {
-			foreach ($articles as $article) {
-				echo '<div class="card">';
-                if (!empty($article['image_path'])){
-				echo '<img class="card-img-top"  src="' . $article['image_path'] . '" alt="Image de l\'article">';
-                }
-				echo '<div class="card-body">';
-				echo '<h3 class="card-title">' . $article['title'] . '</h3>';
-				echo '<p>' . $article['content'] . '</p>';
-				echo '<p>Auteur: ' . $article['firstname'] . ' ' . $article['lastname'] . '</p>';
-				echo '<p>le: ' . $article['created_at'] . '</p>';
-				echo '<btn class="btn btn-primary text-light"><a class="text-light" href="/article?id=' . $article['id'] . '">Lire l\'article</a></btn>';
-				echo '</div>';
-				echo '</div>';
-			}
-		} else {
-			echo '<p>Aucun article trouvé.</p>';
-		} ?>
-    </section>
-</main>
+$pdo = DatabaseManager::getPdoInstance();
+$articleModel = new \Model\Article($pdo);
+$articles = $articleModel->getPublishedArticles();
 
-<!-- ... (pied de page) ... -->
-</body>
-</html>
+try {
+	$template = $twig->load('blog_list.twig');
+	echo $template->render(['articles' => $articles]);
+} catch (\Twig\Error\LoaderError $e) {
+	echo 'Erreur de chargement du modèle Twig (LoaderError): ' . $e->getMessage();
+} catch (\Twig\Error\RuntimeError $e) {
+	echo 'Erreur d\'exécution du modèle Twig (RuntimeError): ' . $e->getMessage();
+} catch (\Twig\Error\SyntaxError $e) {
+	echo 'Erreur de syntaxe dans le modèle Twig (SyntaxError): ' . $e->getMessage();
+}

@@ -55,7 +55,7 @@
                 </form>
 				<?php
 			} else {
-				echo '<p>Article non trouvé.</p>';
+				echo '<p>Article non trouvé. 5</p>';
 			}
 		} else {
 			echo '<p>Identifiant d\'article non spécifié.</p>';

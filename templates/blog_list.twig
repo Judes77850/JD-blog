@@ -1,0 +1,28 @@
+<main class="content mt-5">
+    <h2 class="mb-5">Liste des Articles</h2>
+    <section class="d-flex justify-content-center flex-wrap">
+         {% if articles is not empty %}
+            {% for article in articles %}
+                <div class="card">
+                    {% if article.image_path is not empty %}
+                        <img class="card-img-top" src="{{ article.image_path }}" alt="Image de l'article">
+                    {% endif %}
+                    <div class="card-body overflow-hidden">
+                        <h3 class="card-title">{{ article.title }}</h3>
+                        <p class="card-text ">{{ article.chapo }}</p>
+                        <p>Auteur: {{ article.firstname }} {{ article.lastname }}</p>
+                        <p>le: {{ article.created_at }}</p>
+                        <btn class="btn btn-primary text-light">
+                            <a class="text-light" href="/article?id={{ article.id }}">Lire l'article</a>
+                        </btn>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Aucun article trouvé.</p>
+        {% endif %}
+    </section>
+</main>
+{% include 'footer.twig' %}
+</body
+</html>

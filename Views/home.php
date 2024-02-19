@@ -1,40 +1,18 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-	<meta charset="UTF-8">
-	<title>JD-Blog - Accueil</title>
-</head>
-<body>
-<header>
-	<nav>
-		<?php
-		$router = require_once __DIR__ . '/../index.php';
-		require_once 'Views/header.php';
-		?>
-	</nav>
-</header>
-<main class="d-flex mx-auto bg-secondary row">
-    <section class="col col-8 mx-auto">
-        <h2>Super BLOG</h2>
-        <p>Une photo et/ou un logo</p>
-        <p>Bienvenu sur mon blog</p>
 
-
-        <a href="votre_cv.pdf">Télécharger CV</a>
-
-        <div>
-            <a href="https://github.com/Judes77850" target="_blank">GitHub</a>
-            <a href="https://www.linkedin.com/in/julien-desaindes/" target="_blank">LinkedIn</a>
+<main class="d-flex mx-auto row">
+    <section class="home-intro mx-auto row">
+        <div class="col col-0 col-md-6"></div>
+        <div class="mt-5 d-flex flex-column align-items-end col col-12 col-md-6">
+            <h2 class="big-title">WELCOME</h2>
+            <p class="fs-4 text-md-end">Consectetur enim Lorem consequat elit consequat velit est id do. Ut irure voluptate enim ullamco
+                consequat reprehenderit commodo amet duis Lorem. Dolore laboris Lorem adipisicing labore amet consectetur.
+                Enim laborum pariatur sunt excepteur veniam officia duis duis qui anim. Et nostrud cillum voluptate dolor ea
+                in duis reprehenderit aliquip consequat mollit reprehenderit sint duis.
+            </p>
         </div>
     </section>
 </main>
 
-<footer>
-	<nav>
-		<ul>
-
-		</ul>
-	</nav>
-</footer>
-</body>
-</html>
+<?php
+require_once 'Views/footer.php'
+?>

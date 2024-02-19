@@ -1,29 +1,3 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Ajouter un Article - Mon Blog</title>
-</head>
-<body>
-<header>
-    <h1>Mon Blog - Ajouter un Article</h1>
-    <nav>
-        <ul>
-            <li><a href="/">Accueil</a></li>
-            <li><a href="articles">Articles</a></li>
-			<?php
-			session_start();
-			var_dump($_SESSION);
-			if (isset($_SESSION['user_id'])) {
-				echo '<li><a href="logout">Déconnexion</a></li>';
-			} else {
-				echo '<li><a href="login">Connexion</a></li>';
-				echo '<li><a href="register.php">Créer un compte</a></li>';
-			}
-			?>
-        </ul>
-    </nav>
-</header>
 
 <main>
     <section>

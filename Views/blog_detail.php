@@ -39,7 +39,6 @@
 			$query->execute(array(':id' => $article_id));
 			$article = $query->fetch(PDO::FETCH_ASSOC);
 
-			// Vérification de l'existence de l'article
 			if ($article) {
 				echo '<h2>' . $article['title'] . '</h2>';
 				echo '<p>' . $article['chapo'] . '</p>';
@@ -57,11 +56,8 @@
 				echo '<input type="submit" value="Ajouter un commentaire">';
 				echo '</form>';
 
-				// Affichage des commentaires validés et publiés pour cet article (à récupérer depuis la base de données)
-				// Exemple : $comments = get_comments_by_article_id($article_id);
-				// Afficher les commentaires ici
 			} else {
-				echo '<p>Article non trouvé.</p>';
+				echo '<p>Article non trouvé. 4</p>';
 			}
 		} else {
 			echo '<p>Identifiant d\'article non spécifié.</p>';

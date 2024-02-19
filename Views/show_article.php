@@ -1,66 +1,32 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>JD-Blog - Accueil</title>
-</head>
-<body>
-<header>
-    <nav>
-		<?php
-		$router = require_once __DIR__ . '/../index.php';
-		require_once 'Views/header.php';
-		?>
-    </nav>
-</header>
+<?php
 
-<main>
-    <section>
-		<?php
-		$articleId = $_GET['id'] ?? null;
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../DatabaseManager.php';
+require_once 'Views/header.php';
+require_once __DIR__ . '/../Model/Article.php';
 
-		if ($articleId) {
-			$pdo = new PDO('mysql:host=localhost;dbname=jdblog', 'root', 'Julien77@+');
-			require __DIR__ . '/../Model/Article.php';
-			$articleModel = new \Model\Article($pdo);
+$router = require_once __DIR__ . '/../index.php';
+$loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../templates');
+$twig = new \Twig\Environment($loader);
 
-			$article = $articleModel->getArticleById($articleId);
+$pdo = DatabaseManager::getPdoInstance();
+$articleModel = new \Model\Article($pdo);
 
-			if ($article) {
-				echo '<h2>' . $article['title'] . '</h2>';
-				echo '<p>' . $article['content'] . '</p>';
-				echo '<p>Auteur: ' . $article['firstname'] . ' ' . $article['lastname'] . '</p>';
-				echo '<p>le: ' . $article['created_at'] . '</p>';
-				echo '<p>path: ' . $article['image_path'] . '</p>';
+$articleId = $_GET['id'] ?? null;
 
-				if (!empty($article['image_path'])) {
-					$relativeImagePath = str_replace(__DIR__, '', $article['image_path']);
+if ($articleId) {
+	$article = $articleModel->getArticleById($articleId);
 
-					echo '<img src="' . $relativeImagePath . '" alt="Image de l\'article">';
-				} else {
-					echo '<p>Aucune image disponible.</p>';
-				}
-			} else {
-				echo '<p>Article non trouvé.</p>';
-			}
-		} else {
-			echo '<p>ID d\'article manquant dans l\'URL.</p>';
-		}
-		?>
-
-        <div>
-            <a href="https://github.com/Judes77850" target="_blank">GitHub</a>
-            <a href="https://www.linkedin.com/in/julien-desaindes/" target="_blank">LinkedIn</a>
-        </div>
-    </section>
-</main>
-
-<footer>
-    <nav>
-        <ul>
-
-        </ul>
-    </nav>
-</footer>
-</body>
-</html>
+	try {
+		$template = $twig->load('article.twig');
+		echo $template->render(['article' => $article]);
+	} catch (\Twig\Error\LoaderError $e) {
+		echo 'Erreur de chargement du modèle Twig (LoaderError): ' . $e->getMessage();
+	} catch (\Twig\Error\RuntimeError $e) {
+		echo 'Erreur d\'exécution du modèle Twig (RuntimeError): ' . $e->getMessage();
+	} catch (\Twig\Error\SyntaxError $e) {
+		echo 'Erreur de syntaxe dans le modèle Twig (SyntaxError): ' . $e->getMessage();
+	}
+} else {
+	echo 'ID d\'article manquant dans l\'URL.';
+}

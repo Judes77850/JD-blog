@@ -3,7 +3,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Échec de la connexion</title>
-	<!-- Vous pouvez inclure ici vos liens vers des fichiers CSS, des scripts JavaScript, etc. -->
 </head>
 <body>
 <h1>Échec de la connexion</h1>

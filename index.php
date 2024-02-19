@@ -1,11 +1,42 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
+require_once 'DatabaseManager.php';
 require_once 'vendor/autoload.php';
+require_once 'Controller/ShowArticleController.php';
+require_once 'Controller/CommentController.php';
+require_once 'Controller/ContactController.php';
+require_once 'Controller/RegisterController.php';
+
 
 use Bramus\Router\Router;
+use Controller\ContactController;
+use Controller\RegisterController;
 
+$pdo = DatabaseManager::getPdoInstance();
 $router = new Router();
+$controller = new ShowArticleController();
+$loader = new \Twig\Loader\FilesystemLoader('templates');
+$twig = new \Twig\Environment($loader);
+$registerController = new RegisterController($twig, $pdo);
+
+$router->get('/register', function () use ($registerController) {
+	$registerController->showRegisterForm();
+});
+
+$router->post('/register', function () use ($registerController) {
+	$registerController->registerUser();
+});
+
+$router->get('/contact', function () use ($twig) {
+	$contactController = new ContactController($twig);
+	$contactController->showContactForm();
+});
+
+$router->post('/send_email', function () use ($twig){
+	$contactController = new ContactController($twig);
+	$contactController->sendEmail();
+});
 
 $router->get('/', function () {
 	require_once 'Views/home.php';
@@ -15,20 +46,16 @@ $router->get('/articles', function () {
 	require_once 'Views/blog_list.php';
 });
 
-$router->get('/article', function () {
-	// Récupérer l'ID de l'article depuis les paramètres de l'URL
+$router->get('/article', function () use ($controller) {
 	$articleId = $_GET['id'] ?? null;
-
-	// Vérifier si l'ID de l'article est valide
-	if ($articleId) {
-		// Utilisez $articleId comme vous le souhaitez dans votre logique de contrôleur
-		require_once 'Views/show_article.php';
-	} else {
-		// Gestion d'erreur si l'ID de l'article est manquant
-		echo 'ID d\'article manquant dans l\'URL.';
-	}
+	$controller->showArticle($articleId);
 });
 
+$router->post('/submit_comment', function () {
+	$commentController = new CommentController();
+	$articleId = $_POST["article_id"] ?? null;
+	$commentController->submitComment($articleId);
+});
 
 $router->get('/admin_home', function () {
 	require_once 'Views/admin/admin_home.php';
@@ -80,5 +107,9 @@ $router->post('/update_article', function () {
 	require_once 'Views/update_article.php';
 });
 
-// Exécutez le routeur
+$router->post('/delete_comment', function () {
+	$commentController = new CommentController();
+	$commentController->deleteComment();
+});
+
 $router->run();

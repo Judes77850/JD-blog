@@ -1,0 +1,11 @@
+{
+  "name": "JD-blog",
+  "version": "1.0.0",
+  "description": "Description",
+  "scripts": {
+    "sass": "sass input.scss output.css"
+  },
+  "devDependencies": {
+    "sass": "^1.43.3"
+  }
+}

@@ -1,0 +1,6 @@
+<form class="d-flex flex-column" action="/submit_comment" method="post">
+    <textarea class="form-control w-50 mx-auto mt-4" name="content" rows="4" cols="50" placeholder="Votre commentaire"></textarea><br>
+    <input type="hidden" name="article_id" value="{{ article_id }}">
+    <input type="hidden" name="user_id" value="{{ user_id }}">
+    <input class="btn btn-dark mx-auto" type="submit" value="Soumettre">
+</form>

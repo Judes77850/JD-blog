@@ -1,0 +1,20 @@
+{% if article is defined and article is not empty %}
+<main class="d-flex flex-column">
+    <div class="content article d-flex flex-column mt-5">
+        <h2>{{ article.title }}</h2>
+        {% if article.image_path is not empty %}
+            <img class="article-main-img mx-auto rounded-5" src="{{ article.image_path }}" alt="Image de l'article">
+        {% else %}
+            <p>Aucune image disponible.</p>
+        {% endif %}
+        <p class="my-4">{{ article.content }}</p>
+        <p>Par {{ article.firstname }} {{ article.lastname }}</p>
+        <p>le {{ article.created_at }}</p>
+    </div>
+    <div class="comment-card">
+        {% include 'comment_form.twig' with {'article_id': article.id, 'user_id' : user.id, 'is_admin' : user.role} %}
+    </div>
+    {% else %}
+        <p>Article non trouvé. 2</p>
+    {% endif %}
+</main>
