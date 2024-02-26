@@ -7,11 +7,16 @@ require_once 'Controller/ShowArticleController.php';
 require_once 'Controller/CommentController.php';
 require_once 'Controller/ContactController.php';
 require_once 'Controller/RegisterController.php';
+require_once 'Controller/AdminEditProfilController.php';
+require_once 'Controller/UserController.php';
 
 
 use Bramus\Router\Router;
 use Controller\ContactController;
 use Controller\RegisterController;
+use Controller\AdminEditProfilController;
+use Controller\UserController;
+use Twig\Environment;
 
 $pdo = DatabaseManager::getPdoInstance();
 $router = new Router();
@@ -19,6 +24,8 @@ $controller = new ShowArticleController();
 $loader = new \Twig\Loader\FilesystemLoader('templates');
 $twig = new \Twig\Environment($loader);
 $registerController = new RegisterController($twig, $pdo);
+$userController = new UserController($pdo);
+$adminEditProfilController = new AdminEditProfilController($twig, $userController);
 
 $router->get('/register', function () use ($registerController) {
 	$registerController->showRegisterForm();
@@ -44,6 +51,14 @@ $router->get('/', function () {
 
 $router->get('/articles', function () {
 	require_once 'Views/blog_list.php';
+});
+
+$router->get('/admin_edit_profil', function () use ($adminEditProfilController) {
+	$adminEditProfilController->showEditForm();
+});
+
+$router->post('/update_profil', function () use ($adminEditProfilController) {
+	$adminEditProfilController->updateProfil();
 });
 
 $router->get('/article', function () use ($controller) {
@@ -98,18 +113,16 @@ $router->post('/delete_article', function () {
 });
 
 $router->get('/edit_single_article', function () {
-	$article_id = $_GET['article_id'];
-	echo 'Affichage de l\'article avec l\'ID : ' . $article_id;
 	require_once 'Views/edit_single_article.php';
-});
-
-$router->post('/update_article', function () {
-	require_once 'Views/update_article.php';
 });
 
 $router->post('/delete_comment', function () {
 	$commentController = new CommentController();
 	$commentController->deleteComment();
+});
+
+$router->post('/update_article', function () {
+	require_once 'Views/update_article.php';
 });
 
 $router->run();

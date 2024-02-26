@@ -20,21 +20,21 @@ $articles = $query->fetchAll(PDO::FETCH_ASSOC);
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<meta charset="UTF-8">
-	<title>Administration - Gérer les Articles</title>
+    <meta charset="UTF-8">
+    <title>Administration - Gérer les Articles</title>
 </head>
 <body>
 <header>
-	<h1>Mon Blog - Administration</h1>
-	<nav>
-		<ul>
-			<li><a href="index.php">Accueil</a></li>
-			<li><a href="admin/admin_home.php">Accueil Administration</a></li>
-			<li><a href="add_blog_article.php">Créer un article</a></li>
-			<li><a href="admin/admin_edit_profile.php">Modifier Profil</a></li>
-			<!-- Ajoutez d'autres liens de navigation ici selon les besoins -->
-		</ul>
-	</nav>
+    <h1>Mon Blog - Administration</h1>
+    <nav>
+        <ul>
+            <li><a href="index.php">Accueil</a></li>
+            <li><a href="admin/admin_home.php">Accueil Administration</a></li>
+            <li><a href="add_blog_article.php">Créer un article</a></li>
+            <li><a href="admin/admin_edit_profil.php">Modifier Profil</a></li>
+            <!-- Ajoutez d'autres liens de navigation ici selon les besoins -->
+        </ul>
+    </nav>
 	<?php
 	if (isset($_SESSION['pseudo'])) {
 		echo "Hello, " . $_SESSION['pseudo'];
@@ -45,39 +45,39 @@ $articles = $query->fetchAll(PDO::FETCH_ASSOC);
 </header>
 
 <main>
-	<section>
-		<h2>Gérer mes Articles</h2>
+    <section>
+        <h2>Gérer mes Articles</h2>
 		<?php if (count($articles) > 0) : ?>
-			<ul>
+            <ul>
 				<?php foreach ($articles as $article) : ?>
-					<li>
-						<h3><?= $article['title']; ?></h3>
-						<p><?= $article['chapo']; ?></p>
-						<p><?= $article['status']; ?></p>
-						<form action="../delete_article.php" method="post">
-							<input type="hidden" name="article_id" value="<?= $article['id']; ?>">
-							<input type="submit" value="Supprimer">
-						</form>
-						<form action="edit_single_article.php" method="post">
-							<input type="hidden" name="article_id" value="<?= $article['id']; ?>">
-							<input type="submit" value="Modifier">
-						</form>
-					</li>
+                    <li>
+                        <h3><?= $article['title']; ?></h3>
+                        <p><?= $article['chapo']; ?></p>
+                        <p><?= $article['status']; ?></p>
+                        <form action="../delete_article.php" method="post">
+                            <input type="hidden" name="article_id" value="<?= $article['id']; ?>">
+                            <input type="submit" value="Supprimer">
+                        </form>
+                        <form action="edit_single_article.php" method="post">
+                            <input type="hidden" name="article_id" value="<?= $article['id']; ?>">
+                            <input type="submit" value="Modifier">
+                        </form>
+                    </li>
 				<?php endforeach; ?>
-			</ul>
+            </ul>
 		<?php else : ?>
-			<p>Aucun article trouvé.</p>
+            <p>Aucun article trouvé.</p>
 		<?php endif; ?>
-	</section>
+    </section>
 </main>
 
 <footer>
-	<nav>
-		<ul>
-			<li><a href="logout.php">Déconnexion</a></li>
-			<!-- Autres liens du footer -->
-		</ul>
-	</nav>
+    <nav>
+        <ul>
+            <li><a href="logout.php">Déconnexion</a></li>
+            <!-- Autres liens du footer -->
+        </ul>
+    </nav>
 </footer>
 </body>
 </html>

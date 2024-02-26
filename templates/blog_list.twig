@@ -1,4 +1,4 @@
-<main class="content mt-5">
+<main class="content my-5">
     <h2 class="mb-5">Liste des Articles</h2>
     <section class="d-flex justify-content-center flex-wrap">
          {% if articles is not empty %}
@@ -7,7 +7,7 @@
                     {% if article.image_path is not empty %}
                         <img class="card-img-top" src="{{ article.image_path }}" alt="Image de l'article">
                     {% endif %}
-                    <div class="card-body overflow-hidden">
+                    <div class="card-body">
                         <h3 class="card-title">{{ article.title }}</h3>
                         <p class="card-text ">{{ article.chapo }}</p>
                         <p>Auteur: {{ article.firstname }} {{ article.lastname }}</p>

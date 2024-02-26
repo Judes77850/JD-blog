@@ -18,7 +18,7 @@ class Article
 
 	public function getPublishedArticles()
 	{
-		$query = $this->pdo->query("SELECT a.title, a.content, a.id, a.created_at, a.updated_at, a.chapo, a.image_path, u.firstname, u.lastname 
+		$query = $this->pdo->query("SELECT a.title, a.content, a.id, a.created_at, a.updated_at, a.chapo, a.image_path, u.firstname, u.lastname, u.pseudo 
                            FROM articles a 
                            INNER JOIN user u ON a.author = u.id 
                            WHERE a.status = 'published' 
@@ -29,7 +29,7 @@ class Article
 
 	public function getArticleById($id)
 	{
-		$stmt = $this->pdo->prepare("SELECT a.title, a.content, a.id, a.created_at, a.updated_at, a.chapo, a.image_path, u.firstname, u.lastname 
+		$stmt = $this->pdo->prepare("SELECT a.title, a.content, a.id, a.created_at, a.updated_at, a.chapo, a.image_path, u.firstname, u.lastname, u.pseudo 
                        FROM articles a 
                        INNER JOIN user u ON a.author = u.id 
                        WHERE a.id = :id");

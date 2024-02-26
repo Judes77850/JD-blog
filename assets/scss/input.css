@@ -11879,12 +11879,17 @@ header {
   margin: auto;
 }
 
-.bg-success-mail {
+.success-message {
+  height: 80vh;
+  max-width: 1200px;
   background: url("../images/style/sucess_email.webp");
   background-size: cover;
+  border-radius: 25px;
 }
-.bg-success-mail .to-opacity {
+.success-message .to-opacity {
   background: linear-gradient(#000000, rgba(0, 0, 0, 0.09));
+  border-radius: 25px;
+  padding: 20px;
 }
 
 .article .article-main-img {
@@ -11904,7 +11909,6 @@ header {
 .card {
   width: 300px;
   min-width: 280px;
-  max-height: 600px;
   margin: 20px;
   border: none;
   box-shadow: #afafaf 1px 1px 35px;

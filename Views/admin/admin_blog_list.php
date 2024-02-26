@@ -1,21 +1,3 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Administration - Gérer les Articles</title>
-</head>
-<body>
-
-<?php
-$router = require_once __DIR__ . '/../../index.php';
-require_once 'Views/header.php';
-?>
-
-<ul class="d-flex list-unstyled w-50 mx-auto justify-content-between">
-    <li><a href="admin_home.php">Accueil Administration</a></li>
-    <li><a href="/add_blog_article">Créer un article</a></li>
-    <li><a href="admin_edit_profile.php">Modifier Profil</a></li>
-</ul>
 <?php
 $pdo = new PDO('mysql:host=localhost;dbname=jdblog', 'root', 'Julien77@+');
 
@@ -26,25 +8,32 @@ $articles = $query->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
-
 <main>
-    <section>
-        <h2>Gérer mes Articles</h2>
+    <section class="content mt-5">
+        <h2 class="mb-5">Gérer mes Articles</h2>
 		<?php if (count($articles) > 0) : ?>
-            <div class="d-flex flex-wrap justify-content-between">
+            <div class="d-flex flex-wrap justify-content-start align-items-center">
 				<?php foreach ($articles as $article) : ?>
-                    <div class="card p-4">
-                        <h3><?= $article['title']; ?></h3>
-                        <p><?= $article['chapo']; ?></p>
-                        <p><?= $article['status']; ?></p>
-                        <form action="../delete_article" method="post">
-                            <input type="hidden" name="article_id" value="<?= $article['id']; ?>">
-                            <input type="submit" value="Supprimer">
-                        </form>
-                        <form action="/edit_single_article" method="get">
-                            <input type="hidden" name="article_id" value="<?= $article['id']; ?>">
-                            <input type="submit" value="Modifier">
-                        </form>
+                    <div class="card">
+                        <img class="card-img-top" src="<?= $article['image_path']; ?>" alt="Image de l'article">
+                        <div class="card-body">
+                            <h3 class="card-title"><?= $article['title']; ?></h3>
+                            <p class="card-text "><?= $article['chapo']; ?> <br/><?= $article['status']; ?></p>
+							<?php if (isset($article['id'])) : ?>
+                            <span class="w-75 mx-auto d-flex justify-content-between align-items-center">
+                                <form action="../delete_article" method="post">
+                                    <input type="hidden" name="article_id" value="<?= $article['id']; ?>">
+                                    <input class="btn btn-danger" type="submit" value="Supprimer">
+                                </form>
+                                <form action="/edit_single_article?id=<?= $article['id']; ?>" method="get">
+                                    <input type="hidden" name="article_id" value="<?= $article['id']; ?>">
+                                    <input class="btn btn-info" type="submit" value="Modifier">
+                                </form>
+                            </span>
+							<?php else: ?>
+                                <p>Erreur : ID de l'article non défini</p>
+							<?php endif; ?>
+                        </div>
                     </div>
 				<?php endforeach; ?>
             </div>

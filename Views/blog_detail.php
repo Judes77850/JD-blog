@@ -31,10 +31,8 @@
 		if (isset($_GET['id'])) {
 			$article_id = $_GET['id'];
 
-			// Exemple de connexion à la base de données (à adapter)
 			$pdo = new PDO('mysql:host=localhost;dbname=jdblog', 'root', 'Julien77@+');
 
-			// Exemple de requête pour récupérer les détails de l'article (à adapter)
 			$query = $pdo->prepare("SELECT * FROM articles WHERE id = :id");
 			$query->execute(array(':id' => $article_id));
 			$article = $query->fetch(PDO::FETCH_ASSOC);
@@ -46,7 +44,6 @@
 				echo '<p>Auteur : ' . $article['author'] . '</p>';
 				echo '<p>Date de dernière mise à jour : ' . $article['updated_at'] . '</p>';
 
-				// Formulaire pour ajouter un commentaire
 				echo '<form action="add_comment.php" method="post">';
 				echo '<input type="hidden" name="article_id" value="' . $article['id'] . '">';
 				echo '<label for="author">Votre nom :</label><br>';

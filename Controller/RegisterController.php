@@ -39,7 +39,7 @@ class RegisterController
 
 			if ($success) {
 				echo "Inscription réussie pour l'utilisateur : " . $pseudo;
-				echo "<script>setTimeout(function() { window.location.href = 'index.php'; }, 2000);</script>";
+				echo "<script>setTimeout(function() { window.location.href = '/'; }, 2000);</script>";
 			} else {
 				echo "Une erreur est survenue lors de l'inscription.";
 			}

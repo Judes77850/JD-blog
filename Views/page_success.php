@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-	<meta charset="UTF-8">
-	<title>Connexion approuvée</title>
-	<!-- Vous pouvez inclure ici vos liens vers des fichiers CSS, des scripts JavaScript, etc. -->
-</head>
+
 <body>
 <h1>Connexion approuvée</h1>
 <?php
@@ -19,7 +13,6 @@ if (isset($_SESSION['user_id'])) {
         $pdo = new PDO('mysql:host=localhost;dbname=jdblog', 'root', 'Julien77@+');
 		$user_id = $_SESSION['user_id'];
 
-		// Exécution de la requête SQL pour récupérer le prénom de l'utilisateur
 		$query = $pdo->prepare("SELECT pseudo FROM user WHERE id = ?");
 		$query->execute([$user_id]);
 		$user = $query->fetch(PDO::FETCH_ASSOC);

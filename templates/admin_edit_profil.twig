@@ -1,0 +1,19 @@
+<main>
+    <section class="content h-75 mt-5">
+        <h2>Modifier mon profil</h2>
+        <form class="w-75 mx-auto mt-5" action="/update_profil" method="post">
+            <input class="form-control" type="hidden" name="user_id" value="{{ user.id }}">
+            <label class="form-label" for="lastname">Nom :</label><br>
+            <input class="form-control" type="text" id="lastname" name="lastname" value="{{ user.lastname }}"><br>
+            <label class="form-label" for="firstname">Prénom :</label><br>
+            <input class="form-control" type="text" id="firstname" name="firstname" value="{{ user.firstname }}"><br>
+            <label class="form-label" for="pseudo">Pseudo :</label><br>
+            <input class="form-control" type="text" id="pseudo" name="pseudo" value="{{ user.pseudo }}"><br>
+            <label class="form-label" for="email">Adresse e-mail :</label><br>
+            <input class="form-control" type="email" id="email" name="email" value="{{ user.email }}"><br>
+            <label class="form-label" for="new_password">Nouveau mot de passe :</label><br>
+            <input class="form-control" type="password" id="new_password" name="new_password"><br>
+            <input class="btn btn-dark" type="submit" value="Enregistrer les modifications">
+        </form>
+    </section>
+</main>

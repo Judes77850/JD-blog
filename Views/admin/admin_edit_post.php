@@ -11,7 +11,7 @@
         <ul>
             <li><a href="admin_home.php">Accueil Administration</a></li>
             <li><a href="admin_blog_list.php">Gérer les Articles</a></li>
-            <li><a href="admin_edit_profile.php">Modifier Profil</a></li>
+            <li><a href="admin_edit_profil.php">Modifier Profil</a></li>
         </ul>
     </nav>
 </header>

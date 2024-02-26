@@ -5,22 +5,24 @@
     <link href="assets/scss/input.css" rel="stylesheet">
 </head>
 <header class="">
-    <div class="d-flex align-items-center">
+    <div class="d-flex align-items-center justify-content-between">
         <a href="/"><img class="header-logo col col-3" src="../assets/images/style/jd-blog.jpeg"></a>
         <span class="col col-2"></span>
-        <nav class="col col-6">
-            <ul class="col col-12 d-flex list-unstyled justify-content-between mb-0 fs-5">
-                    <li><a class="text-light" href="/">Accueil</a></li>
-                    <li><a class="text-light" href="articles">Articles</a></li>
-                {% if user_id is defined and user_id is not empty %}
-                    <li><a class="text-light" href="admin_home">Mon Compte</a></li>
-                    <li><a class="text-light" href="logout">Déconnexion</a></li>
-                {% else %}
-                    <li><a class="text-light" href="login">Connexion</a></li>
-                    <li><a class="text-light" href="register">Créer un compte</a></li>
-                {% endif %}
-                    <li><a class="text-light" href="contact">Contact</a></li>
-                <li class="text-light">Hello {{ pseudo }}</li>
+        <nav class="col col-7">
+            <ul class="col col-12 d-flex list-unstyled justify-content-between align-items-center mb-0 fs-5">
+                <li><a class="text-light" href="/">Accueil</a></li>
+                <li><a class="text-light" href="articles">Articles</a></li>
+                <li><a class="text-light" href="contact">Contact</a></li>
+                <span class="m-2 text-light">
+                    Hello {{ pseudo }}
+                    {% if user_id is defined and user_id is not empty %}
+                        <li><a class="text-light" href="admin_home">Mon Compte</a></li>
+                        <li><a class="text-light" href="logout">Déconnexion</a></li>
+                    {% else %}
+                        <li><a class="text-light" href="login">Connexion</a></li>
+                        <li><a class="text-light" href="register">Créer un compte</a></li>
+                    {% endif %}
+                </span>
             </ul>
         </nav>
     </div>
