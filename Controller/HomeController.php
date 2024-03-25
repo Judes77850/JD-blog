@@ -2,19 +2,19 @@
 
 namespace Controller;
 
-class HomeController {
-	public function index() {
-		// Instanciation du modèle HeaderModel
-		$headerModel = new HeaderModel(new \PDO('mysql:host=localhost;dbname=jdblog', 'root', 'Julien77@+'));
+require_once __DIR__ . '/../DatabaseManager.php';
+use PDO;
 
-		// Vérifier si l'utilisateur est connecté
-		if (isset($_SESSION['user_id'])) {
-			// Récupérer le pseudo de l'utilisateur
-			$pseudo = $headerModel->getUserPseudo($_SESSION['user_id']);
-		}
-
-		// Inclure la vue de l'en-tête
-		include __DIR__ . '/../Views/header.php';
-		require __DIR__ . '/../index.php';
+class HomeController
+{
+	public function showHome()
+	{
+		$pdo = \DatabaseManager::getPdoInstance();
+		$query = $pdo->query("SELECT * FROM articles WHERE status = 'Published' ORDER BY created_at DESC LIMIT 4");
+		$articles = $query->fetchAll(PDO::FETCH_ASSOC);
+		$loader = new \Twig\Loader\FilesystemLoader('templates');
+		$twig = new \Twig\Environment($loader);
+		$template = $twig->load('home.twig');
+		echo $template->render(['articles' => $articles]);
 	}
 }

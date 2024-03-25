@@ -15,11 +15,9 @@ class BlogController
 
 	public function index()
 	{
-		// Appeler la méthode pour récupérer les articles
 		$articles = $this->articleModel->getPublishedArticles();
 
-		// Passer les articles à la vue
-		include __DIR__ . '/../Views/blog_list.php';
+		include __DIR__ . '/../templates/blog_list.twig';
 	}
 }
 

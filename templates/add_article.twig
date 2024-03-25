@@ -1,7 +1,7 @@
 <main>
     <section class="content mt-5">
         <h2>Ajouter un nouvel article</h2>
-        <form class="bg-black text-light p-3 rounded-3 w-75 mx-auto mt-5 d-flex flex-column justify-content-center " action="create_article" method="post" enctype="multipart/form-data">
+        <form class="bg-black text-light p-3 rounded-3 w-75 mx-auto mt-5 d-flex flex-column justify-content-center" action="create_article" method="post" enctype="multipart/form-data">
             <label class="form-label" for="title">Titre :</label><br>
             <input class="form-control" type="text" id="title" name="titre" required><br>
 
@@ -19,7 +19,7 @@
                 <option value="published">Publié</option>
                 <option value="pending">En attente</option>
             </select><br>
-            <input class="form-control" type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'] ?? ''; ?>">
+            <input type="hidden" name="user_id" value="{{ app.session.get('user_id') ?? '' }}">
             <input class="btn btn-warning w-50 mx-auto" type="submit" value="Ajouter l'article">
         </form>
     </section>

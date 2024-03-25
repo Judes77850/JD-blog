@@ -23,10 +23,6 @@ class CommentModel
 		return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 	}
 
-	public function addComment($articleId, $content)
-	{
-	}
-
 	public function saveComment($postId, $content, $userId)
 	{
 		$stmt = $this->pdo->prepare("INSERT INTO comment (post_id, content, author, created_at) VALUES (:postId, :content, :userId, NOW())");

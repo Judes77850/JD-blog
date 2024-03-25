@@ -2,29 +2,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>JD-Blog</title>
-    <link href="assets/scss/input.css" rel="stylesheet">
+    <link href="../assets/scss/input.css" rel="stylesheet">
 </head>
-<header class="">
+<body>
+<header class="d-none d-md-block">
     <div class="d-flex align-items-center justify-content-between">
         <a href="/"><img class="header-logo col col-3" src="../assets/images/style/jd-blog.jpeg"></a>
         <span class="col col-2"></span>
         <nav class="col col-7">
-            <ul class="col col-12 d-flex list-unstyled justify-content-between align-items-center mb-0 fs-5">
+            <ul class="col col-12 d-md-flex list-unstyled justify-content-between align-items-center mb-0 fs-5">
                 <li><a class="text-light" href="/">Accueil</a></li>
-                <li><a class="text-light" href="articles">Articles</a></li>
-                <li><a class="text-light" href="contact">Contact</a></li>
+                <li><a class="text-light" href="../articles">Articles</a></li>
+                <li><a class="text-light" href="../contact">Contact</a></li>
                 <span class="m-2 text-light">
                     Hello {{ pseudo }}
                     {% if user_id is defined and user_id is not empty %}
-                        <li><a class="text-light" href="admin_home">Mon Compte</a></li>
-                        <li><a class="text-light" href="logout">Déconnexion</a></li>
+                        <li><a class="text-light" href="../admin_home">Mon Compte</a></li>
+                        <li><a class="text-light" href="../logout">Déconnexion</a></li>
                     {% else %}
-                        <li><a class="text-light" href="login">Connexion</a></li>
-                        <li><a class="text-light" href="register">Créer un compte</a></li>
+                        <li><a class="text-light" href="../connexion">Connexion</a></li>
+                        <li><a class="text-light" href="../register">Créer un compte</a></li>
                     {% endif %}
                 </span>
             </ul>
         </nav>
     </div>
-    </nav>
 </header>
+<header class="d-md-none">
+    <body>
+    <nav>
+        <div class="navbar">
+            <div class="container nav-container">
+                <input class="checkbox" type="checkbox"/>
+                <div class="hamburger-lines">
+                    <span class="line line1"></span>
+                    <span class="line line2"></span>
+                    <span class="line line3"></span>
+                </div>
+                <div class="logo">
+                    <a href="/"><img class="header-logo" src="../assets/images/style/jd-blog.jpeg"></a>
+                </div>
+                <div class="menu-items bg-black mb-5">
+                    <div class="fs-1 text-light"> Hello {{ pseudo }}</div>
+                    <li><a class="text-light" href="/">Accueil</a></li>
+                    <li><a class="text-light" href="../articles">Articles</a></li>
+                    <li><a class="text-light" href="../contact">Contact</a></li>
+                    {% if user_id is defined and user_id is not empty %}
+                        <li><a class="text-light" href="../admin_home">Mon Compte</a></li>
+                        <li><a class="text-light" href="../logout">Déconnexion</a></li>
+                    {% else %}
+                        <li><a class="text-light" href="../login">Connexion</a></li>
+                        <li><a class="text-light" href="../register">Créer un compte</a></li>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+    </body>
+</header>
+

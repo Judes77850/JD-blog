@@ -1,0 +1,26 @@
+<section class="content">
+    <h1 class="my-5">Editer utilisateur</h1>
+    <form class="bg-dark rounded-4 text-light p-4" action="/update_user/{{ user.id }}" method="post">
+        <div class="mb-3">
+            <label for="firstname" class="form-label">Prénom:</label>
+            <input type="text" class="form-control" id="firstname" name="firstname" value="{{ user.firstname }}">
+        </div>
+        <div class="mb-3">
+            <label for="lastname" class="form-label">Nom:</label>
+            <input type="text" class="form-control" id="lastname" name="lastname" value="{{ user.lastname }}">
+        </div>
+        <div class="mb-3">
+            <label for="pseudo" class="form-label">Pseudo:</label>
+            <input type="text" class="form-control" id="pseudo" name="pseudo" value="{{ user.pseudo }}">
+        </div>
+        <div class="mb-3">
+            <label for="role" class="form-label">Rôle:</label>
+            <input type="text" class="form-control" id="role" name="role" value="{{ user.role ? user.role : 'non' }}">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}">
+        </div>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </form>
+</section>

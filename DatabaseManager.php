@@ -8,7 +8,7 @@ class DatabaseManager
 	{
 	}
 
-	public static function getPdoInstance()
+	public static function getPdoInstance(): PDO
 	{
 		if (self::$pdoInstance === null) {
 			self::$pdoInstance = new PDO('mysql:host=localhost;dbname=jdblog', 'root', 'Julien77@+');

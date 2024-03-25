@@ -1,0 +1,26 @@
+<main>
+    <section class="content my-5">
+        <h2 class="my-5">Formulaire de Modification</h2>
+        <form class="mx-auto w-75" action="/update_article" method="post" enctype="multipart/form-data">
+            <input class="form-control" type="hidden" name="article_id" value="{{ article.id }}">
+            <label class="form-label" for="title">Titre:</label><br>
+            <input class="form-control" type="text" id="title" name="title" value="{{ article.title }}"><br><br>
+            <label class="form-label" for="chapo">chapo:</label><br>
+            <input class="form-control" type="text" id="chapo" name="chapo" value="{{ article.chapo }}"><br><br>
+            <label class="form-label" for="content">Contenu:</label><br>
+            <textarea class="form-control" id="content" name="content" rows="5" cols="50">{{ article.content }}</textarea><br><br>
+            <label class="form-label" for="image">Image:</label><br>
+            <input class="form-control" type="file" id="image" name="image"><br><br>
+            {% if article.image_path %}
+                <img class="mx-auto w-75 rounded-5" src="../{{ article.image_path }}" alt="Current Image"><br><br>
+            {% endif %}
+            <label class="form-label" for="status">Status:</label><br>
+            <select class="form-control" id="status" name="status">
+                <option value="published" {% if article.status == 'published' %} selected {% endif %}>Publié</option>
+                <option value="draft" {% if article.status == 'pending' %} selected {% endif %}>En attente</option>
+            </select><br><br>
+            <button class="btn btn-primary" type="submit">Update Article</button>
+        </form>
+    </section>
+</main>
+{% include 'footer.twig' %}

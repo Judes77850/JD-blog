@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php'; // Chemin vers autoload.php de Composer
+require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../Model/HeaderModel.php';
 require_once __DIR__ . '/../DatabaseManager.php';
 session_start();

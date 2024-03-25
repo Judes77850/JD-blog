@@ -18,7 +18,7 @@ class CommentController
 		}
 
 		$template = $twig->load('comment.twig');
-		echo $template->render(['comments' => $comments, 'is_admin' => $is_admin]);
+		echo $template->render(['comments' => $comments, 'is_admin' => $is_admin, 'article_id' => $articleId]);
 	}
 
 	public function submitComment($articleId)
@@ -55,16 +55,15 @@ class CommentController
 		}
 	}
 
-	public function deleteComment() {
-		if ($_SESSION['user_role'] == 'admin') {
-			$commentId = $_POST['comment_id'];
+	public function deleteComment($articleId, $commentId) {
 
+		if ($_SESSION['user_role'] == 'admin') {
 			$pdo = DatabaseManager::getPdoInstance();
 			$commentModel = new \Model\CommentModel($pdo);
-
 			$success = $commentModel->deleteComment($commentId);
 
 			if ($success) {
+				header("refresh:1;url=/article?id=" . $articleId);
 				echo "Le commentaire a été supprimé avec succès.";
 			} else {
 				echo "Une erreur s'est produite lors de la suppression du commentaire.";
