@@ -81,8 +81,6 @@ class ArticleController
 		session_start();
 
 		if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['user_id'])) {
-			var_dump($_POST);
-
 			$title = $_POST["titre"];
 			$chapo = $_POST["chapo"];
 			$content = $_POST["content"];
@@ -98,13 +96,12 @@ class ArticleController
 				exit();
 			}
 
+			$createdAt = date("Y-m-d H:i:s");
+
 			$userQuery = $pdo->prepare("SELECT id FROM user WHERE pseudo = ?");
-			var_dump($userQuery);
 
 			$userQuery->execute([$pseudo]);
 			$user = $userQuery->fetch(PDO::FETCH_ASSOC);
-
-			var_dump($user);
 
 			if ($user && isset($user['id'])) {
 
@@ -116,8 +113,8 @@ class ArticleController
 					try {
 						$relativeImagePath = $uploadDirectory . $uploadedFileName;
 
-						$query = $pdo->prepare("INSERT INTO articles (title, chapo, content, status, author, image_path) VALUES (?, ?, ?, ?, ?, ?)");
-						$query->execute([$title, $chapo, $content, $status, $authorId, $relativeImagePath]);
+						$query = $pdo->prepare("INSERT INTO articles (title, chapo, content, status, author, image_path, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)");
+						$query->execute([$title, $chapo, $content, $status, $authorId, $relativeImagePath, $createdAt ]);
 
 						header("Location: admin_home");
 						exit();
@@ -158,34 +155,33 @@ class ArticleController
 		}
 		exit();
 	}
-
 	public function showArticle($articleId)
 	{
 
-		if (!isset($_SESSION['user_id'])) {
-			header("Location: /login");
-			exit();
-		}
-
 		try {
-			$query = $this->pdo->prepare("SELECT * FROM articles WHERE id = ?");
-			$query->execute([$articleId]);
-			$article = $query->fetch(PDO::FETCH_ASSOC);
+			$queryArticle = $this->pdo->prepare("SELECT * FROM articles WHERE id = ?");
+			$queryArticle->execute([$articleId]);
+			$article = $queryArticle->fetch(PDO::FETCH_ASSOC);
 
 			if (!$article) {
 				echo '<p>Article non trouvé.</p>';
 				return;
 			}
 
+			$queryAuthor = $this->pdo->prepare("SELECT pseudo FROM user WHERE id = ?");
+			$queryAuthor->execute([$article['author']]);
+			$user = $queryAuthor->fetch(PDO::FETCH_ASSOC);
+			$connectedUser = (isset($_SESSION['user_id']));
+
 			$loader = new \Twig\Loader\FilesystemLoader('templates');
 			$twig = new \Twig\Environment($loader);
 
-			echo $twig->render('article.twig', ['article' => $article]);
+			echo $twig->render('article.twig', ['article' => $article, 'authorPseudo' => $user['pseudo'], 'connectedUser' => $connectedUser]);
 		} catch (PDOException $e) {
 			echo "Une erreur est survenue lors du chargement de l'article : " . $e->getMessage();
 		}
-	}
 
+	}
 	public function showArticlesList()
 	{
 
@@ -212,6 +208,5 @@ class ArticleController
 		} catch (\Twig\Error\SyntaxError $e) {
 			echo 'Erreur de syntaxe dans le modèle Twig (SyntaxError): ' . $e->getMessage();
 		}
-
 	}
 }

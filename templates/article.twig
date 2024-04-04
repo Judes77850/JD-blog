@@ -8,13 +8,20 @@
             <p>Aucune image disponible.</p>
         {% endif %}
         <p class="my-4">{{ article.content }}</p>
-        <p>Par {{ article.pseudo }}</p>
+        <p>Par {{ authorPseudo }}</p>
         <p>le {{ article.created_at }}</p>
-    </div>
-    <div class="comment-card">
-        {% include 'comment_form.twig' with {'article_id': article.id, 'user_id' : user.id, 'is_admin' : user.role} %}
     </div>
     {% else %}
         <p>Article non trouvé. 2</p>
+    {% endif %}
+    {% if connectedUser %}
+        <div class="comment-card">
+            {% include 'comment_form.twig' with {'article_id': article.id, 'user_id' : user.id, 'is_admin' : user.role} %}
+        </div>
+    {% else %}
+        <div class="content my-5">
+            <p class="fst-italic">Vous devez être connecté pour voir et laisser un commentaire</p>
+        </div>
+        {% include'footer.twig' %}
     {% endif %}
 </main>

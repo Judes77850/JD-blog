@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <h3 class="card-title">{{ article.title }}</h3>
                         <p class="card-text ">{{ article.chapo }}</p>
-                        <p>Auteur: {{ article.firstname }} {{ article.lastname }}</p>
+                        <p>Auteur: {{ article.pseudo }}</p>
                         <p>le: {{ article.created_at }}</p>
                         <btn class="btn btn-primary text-light">
                             <a class="text-light" href="/article?id={{ article.id }}">Lire l'article</a>

@@ -13,23 +13,17 @@ class CommentController
 		$loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../templates');
 		$twig = new \Twig\Environment($loader);
 
-		if (!isset($_SESSION['user_id'])) {
-			echo "Vous devez être connecté pour laisser un commentaire";
+		if (isset($_SESSION['user_id'])){
+			$template = $twig->load('comment.twig');
+			echo $template->render(['comments' => $comments, 'is_admin' => $is_admin, 'article_id' => $articleId]);
 		}
 
-		$template = $twig->load('comment.twig');
-		echo $template->render(['comments' => $comments, 'is_admin' => $is_admin, 'article_id' => $articleId]);
 	}
 
 	public function submitComment($articleId)
 	{
-		if (!isset($_SESSION['user_id'])) {
-			echo "Vous devez être connecté pour laisser un commentaire";
-			header("Location: /login");
-			exit();
-		}
 
-		if ($_SERVER["REQUEST_METHOD"] == "POST") {
+		if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION['user_id']) {
 			if (isset($_POST["content"]) && !empty($_POST["content"])) {
 				$content = $_POST["content"];
 				$userId = $_SESSION['user_id'];

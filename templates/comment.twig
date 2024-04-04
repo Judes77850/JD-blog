@@ -1,7 +1,8 @@
 {% if comments is defined and comments is not empty %}
 <div class="comment-card d-flex flex-column">
-    <div class="content d-flex flex-column justify-content-center align-items-center">
+    <div class="content d-flex flex-column justify-content-center align-items-center py-4">
         <h3>Commentaires</h3>
+        <div class="d-flex justify-content-center align-items-center">
         {% for comment in comments %}
             <div class="comment m-2">
                 <p class="text-light">{{ comment.content }}</p>
@@ -16,9 +17,11 @@
             {% endif %}
         {% endfor %}
         {% else %}
+        </div>
         <div class="mt-4 mx-auto d-flex justify-content-center">
             <p>Pas de commentaires pour le moment.</p>
         </div>
         {% endif %}
     </div>
 </div>
+{% include 'footer.twig' %}
