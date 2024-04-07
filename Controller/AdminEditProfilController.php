@@ -3,6 +3,7 @@
 namespace Controller;
 
 use Twig\Environment;
+
 require_once __DIR__ . '/../DatabaseManager.php';
 require_once 'Views/header.php';
 

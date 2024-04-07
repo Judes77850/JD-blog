@@ -36,7 +36,8 @@ class CommentModel
 		return $success;
 	}
 
-	public function deleteComment($commentId) {
+	public function deleteComment($commentId)
+	{
 		$stmt = $this->pdo->prepare("DELETE FROM comment WHERE id = :commentId");
 		$stmt->bindParam(':commentId', $commentId, \PDO::PARAM_INT);
 
@@ -44,7 +45,6 @@ class CommentModel
 
 		return $success;
 	}
-
 
 
 }

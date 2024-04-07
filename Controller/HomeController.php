@@ -3,6 +3,7 @@
 namespace Controller;
 
 require_once __DIR__ . '/../DatabaseManager.php';
+
 use PDO;
 
 class HomeController

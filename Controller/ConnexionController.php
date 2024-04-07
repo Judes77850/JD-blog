@@ -2,18 +2,23 @@
 
 namespace Controller;
 require_once __DIR__ . '/../DatabaseManager.php';
+
 use PDO;
 
-class ConnexionController {
+class ConnexionController
+{
 
-	public function connexion() {
+	public function connexion()
+	{
 
 		$loader = new \Twig\Loader\FilesystemLoader('templates');
 		$twig = new \Twig\Environment($loader);
 
 		echo $twig->render('login.twig');
 	}
-	public function login() {
+
+	public function login()
+	{
 		if (session_status() == PHP_SESSION_NONE) {
 			session_start();
 		}
@@ -42,7 +47,9 @@ class ConnexionController {
 			exit();
 		}
 	}
-	public function logout() {
+
+	public function logout()
+	{
 		session_start();
 		$_SESSION = array();
 

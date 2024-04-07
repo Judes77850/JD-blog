@@ -8,7 +8,8 @@
             <label class="form-label" for="chapo">chapo:</label><br>
             <input class="form-control" type="text" id="chapo" name="chapo" value="{{ article.chapo }}"><br><br>
             <label class="form-label" for="content">Contenu:</label><br>
-            <textarea class="form-control" id="content" name="content" rows="5" cols="50">{{ article.content }}</textarea><br><br>
+            <textarea class="form-control" id="content" name="content" rows="5"
+                      cols="50">{{ article.content }}</textarea><br><br>
             <label class="form-label" for="image">Image:</label><br>
             <input class="form-control" type="file" id="image" name="image"><br><br>
             {% if article.image_path %}

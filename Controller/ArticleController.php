@@ -114,7 +114,7 @@ class ArticleController
 						$relativeImagePath = $uploadDirectory . $uploadedFileName;
 
 						$query = $pdo->prepare("INSERT INTO articles (title, chapo, content, status, author, image_path, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)");
-						$query->execute([$title, $chapo, $content, $status, $authorId, $relativeImagePath, $createdAt ]);
+						$query->execute([$title, $chapo, $content, $status, $authorId, $relativeImagePath, $createdAt]);
 
 						header("Location: admin_home");
 						exit();
@@ -155,6 +155,7 @@ class ArticleController
 		}
 		exit();
 	}
+
 	public function showArticle($articleId)
 	{
 
@@ -182,6 +183,7 @@ class ArticleController
 		}
 
 	}
+
 	public function showArticlesList()
 	{
 

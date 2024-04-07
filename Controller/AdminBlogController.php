@@ -2,8 +2,10 @@
 
 require_once __DIR__ . '/../model/AdminBlogModel.php';
 
-class AdminBlogController {
-	public function listArticles() {
+class AdminBlogController
+{
+	public function listArticles()
+	{
 		if (isset($_SESSION['user_id'])) {
 			$user_id = $_SESSION['user_id'];
 			$articles = AdminBlogModel::getArticlesByUserId($user_id);

@@ -1,8 +1,10 @@
 <?php
 // models/AdminBlogModel.php
 
-class AdminBlogModel {
-	public static function getArticlesByUserId($user_id) {
+class AdminBlogModel
+{
+	public static function getArticlesByUserId($user_id)
+	{
 		require_once __DIR__ . '/../DatabaseManager.php';
 		$pdo = DatabaseManager::getPdoInstance();
 
@@ -11,4 +13,5 @@ class AdminBlogModel {
 		return $query->fetchAll(PDO::FETCH_ASSOC);
 	}
 }
+
 ?>

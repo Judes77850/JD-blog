@@ -1,14 +1,17 @@
 <?php
+
 namespace Controller;
 
 use PDO;
 
 require_once __DIR__ . '/../DatabaseManager.php';
 
-class UserController {
+class UserController
+{
 	private $userModel;
 
-	public function __construct($userModel) {
+	public function __construct($userModel)
+	{
 		$this->userModel = $userModel;
 	}
 

@@ -3,20 +3,20 @@
     <div class="content d-flex flex-column justify-content-center align-items-center py-4">
         <h3>Commentaires</h3>
         <div class="d-flex justify-content-center align-items-center">
-        {% for comment in comments %}
-            <div class="comment m-2">
-                <p class="text-light">{{ comment.content }}</p>
-                <span class="text-light">Par {{ comment.author }} <br/> le {{ comment.created_at }}</span>
-            </div>
-            {% if is_admin %}
-                <form class="mx-auto" action="/delete_comment" method="post">
-                    <input type="hidden" name="comment_id" value="{{ comment.id }}">
-                    <input type="hidden" name="article_id" value="{{ article_id }}">
-                    <button class="btn btn-dark" type="submit">Supprimer</button>
-                </form>
-            {% endif %}
-        {% endfor %}
-        {% else %}
+            {% for comment in comments %}
+                <div class="comment m-2">
+                    <p class="text-light">{{ comment.content }}</p>
+                    <span class="text-light">Par {{ comment.author }} <br/> le {{ comment.created_at }}</span>
+                </div>
+                {% if is_admin %}
+                    <form class="mx-auto" action="/delete_comment" method="post">
+                        <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                        <input type="hidden" name="article_id" value="{{ article_id }}">
+                        <button class="btn btn-dark" type="submit">Supprimer</button>
+                    </form>
+                {% endif %}
+            {% endfor %}
+            {% else %}
         </div>
         <div class="mt-4 mx-auto d-flex justify-content-center">
             <p>Pas de commentaires pour le moment.</p>

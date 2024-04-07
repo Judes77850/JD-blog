@@ -13,7 +13,7 @@ class CommentController
 		$loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../templates');
 		$twig = new \Twig\Environment($loader);
 
-		if (isset($_SESSION['user_id'])){
+		if (isset($_SESSION['user_id'])) {
 			$template = $twig->load('comment.twig');
 			echo $template->render(['comments' => $comments, 'is_admin' => $is_admin, 'article_id' => $articleId]);
 		}
@@ -49,7 +49,8 @@ class CommentController
 		}
 	}
 
-	public function deleteComment($articleId, $commentId) {
+	public function deleteComment($articleId, $commentId)
+	{
 
 		if ($_SESSION['user_role'] == 'admin') {
 			$pdo = DatabaseManager::getPdoInstance();

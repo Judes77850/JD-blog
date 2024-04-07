@@ -49,7 +49,7 @@ $router->get('/contact', function () use ($twig) {
 	$contactController->showContactForm();
 });
 
-$router->post('/send_email', function () use ($twig){
+$router->post('/send_email', function () use ($twig) {
 	$contactController = new ContactController($twig);
 	$contactController->sendEmail();
 });
@@ -59,7 +59,7 @@ $router->get('/', function () {
 	$homeController->showHome();
 });
 
-$router->get('/articles', function () use ($articleController){
+$router->get('/articles', function () use ($articleController) {
 	$articleController->showArticlesList();
 });
 
@@ -97,11 +97,11 @@ $router->post('/delete_article', function () use ($articleController) {
 	$articleController->deleteArticle();
 });
 
-$router->get('/admin_home', function () use ($adminBlogController){
+$router->get('/admin_home', function () use ($adminBlogController) {
 	$adminBlogController->adminDashboard();
 });
 
-$router->get('/admin_blog_list', function () use ($adminBlogController){
+$router->get('/admin_blog_list', function () use ($adminBlogController) {
 	$adminBlogController->listArticles();
 });
 
@@ -116,7 +116,7 @@ $router->get('/logout', function () {
 	$connexionController->logout();
 });
 
-$router->get('/connexion', function ()  {
+$router->get('/connexion', function () {
 	$connexionController = new ConnexionController();
 	$connexionController->connexion();
 });
